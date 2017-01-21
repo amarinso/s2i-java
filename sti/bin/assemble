@@ -123,12 +123,23 @@ else
   copy_artifacts "$ARTIFACT_DIR" jar
 fi
 
+echo "listing contens for debugging build image"
+echo "ls -l ${LOCAL_SOURCE_DIR}"
+ls -l ${LOCAL_SOURCE_DIR}
+echo "ls -l ${HOME}"
+ls -l ${HOME}
+echo "ls -l ${ARTIFACT_DIR}"
+ls -l ${ARTIFACT_DIR}
+
 # As Microservices you should only have 1 fat jar
 # if compgen -G "/tmp/src/*" >/dev/null; then
 # TODO: Review how best move these
-if [ $(ls ${ARTIFACT_APP} | wc -l) -eq 1 ]; then
-  echo "[INFO] Copying ${ARTIFACT_APP}.jar into ${DEPLOY_DIR}/app.jar"
-  cp ${ARTIFACT_APP}.jar ${DEPLOY_DIR}/app.jar
+echo "ls ${LOCAL_SOURCE_DIR}/${ARTIFACT_APP}"
+ls -h ${LOCAL_SOURCE_DIR}/${ARTIFACT_APP}
+
+if [ $(ls ${LOCAL_SOURCE_DIR}/${ARTIFACT_APP} | wc -l) -eq 1 ]; then
+  echo "[INFO] Copying ${LOCAL_SOURCE_DIR}/${ARTIFACT_APP}.jar into ${DEPLOY_DIR}/app.jar"
+  cp ${LOCAL_SOURCE_DIR}/${ARTIFACT_APP}.jar ${DEPLOY_DIR}/app.jar
   [ ! -f ${DEPLOY_DIR}/app.jar ] && echo "Application could not be properly built." && exit 1
   echo "[INFO] Application jar file is located in ${DEPLOY_DIR}/app.jar"
 else
