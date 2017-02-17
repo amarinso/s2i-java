@@ -2,6 +2,17 @@
 
 http://www.github.com/oasp/oasp4j
 
+First build the "builder" image
+
+docker build -t s2i-oasp4j .
+
+Then build your app with this builder image
+
+s2i.exe build https://github.com/amarinso/oasp4j-restaurant s2i-oasp4j oasp4j-sample-amarinso
+
+
+======
+
 This Source-to-Image Builder let's you create projects targetting Java OpenJDK 8 and built with:
 
 * maven
@@ -51,3 +62,5 @@ oc create -f https://raw.githubusercontent.com/jorgemoralespou/s2i-java/master/o
 
 == Samples
 There is a lot of example SpringBoot applications https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples[here]
+
+
